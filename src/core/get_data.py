@@ -18,4 +18,10 @@ def get_race_urls(data: str) -> list:
 
 
 def get_race_data(url: str) -> list:
-    pass
+    # レースデータの取得
+    html = driver.get_html(url)
+    race_title = html.select("div.RaceName")[0].text.strip()
+    # トラック情報の取得(地面,距離)
+    track_info = html.select("div.RaceData01 span", limit=1)[0].text.strip()
+    track = track_info[0:1]
+    distance = track_info[1:]
