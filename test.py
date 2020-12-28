@@ -1,16 +1,4 @@
-from src.core.get_data import get_race_urls, get_race_data
-from src.core.get_data import write_data_to_csv
-from time import sleep
+from src.data_downloader import download_race_data
 
 date = "20201226"
-race_info = get_race_urls(date)
-places = [place for place in race_info.keys()]
-for place in places:
-    for races in race_info[place]:
-        for r in races.keys():
-            file_name = date + place + r + ".csv"
-            race_data = get_race_data(races[r])
-            write_data_to_csv(file_name, race_data)
-
-            sleep(1)
-            exit()
+download_race_data(date)
