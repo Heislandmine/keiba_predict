@@ -1,6 +1,5 @@
 from src.core.get_data import get_race_urls, get_race_data
-from src.lib.file_handler import write_data_to_csv
-import csv
+from src.core.get_data import write_data_to_csv
 from time import sleep
 
 date = "20201226"
@@ -14,3 +13,4 @@ for place in places:
             write_data_to_csv(file_name, race_data)
 
             sleep(1)
+            exit()
