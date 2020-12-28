@@ -10,7 +10,6 @@ class Driver:
         self.driver.get(path)
         source = self.driver.page_source.encode("utf-8")
         html = BeautifulSoup(source, "html.parser")
-        self.driver.close()
 
         return html
 
