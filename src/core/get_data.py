@@ -28,11 +28,37 @@ driver: Driver = Driver()
 
 def get_race_urls(data: str) -> list:
     html = driver.get_html(base_list_page_url + data)
-    list_a = html.select("li.RaceList_DataItem a.LinkIconRaceMovie")
 
-    list_race_ids: list = [a.get("id").replace("movie_", "") for a in list_a]
-    list_race_urls: list = [base_race_url + race_id for race_id in list_race_ids]
-    return list_race_urls
+    race_urls_dict = {}
+
+    list_race_data = html.select("dl.RaceList_DataList")
+
+    for race_data in list_race_data:
+        race_info = []
+
+        place = (
+            race_data.select("p.RaceList_DataTitle")[0]
+            .text.strip()
+            .replace(" ", "")[2:4]
+        )
+
+        list_race = race_data.select("li.RaceList_DataItem")
+
+        for race in list_race:
+            race_num = race.select("div.Race_Num span")[0].text.strip()
+            race_id = (
+                race.find("a", class_="LinkIconRaceMovie")
+                .get("id")
+                .replace("movie_", "")
+            )
+
+            race_url = base_race_url + race_id
+
+            race_info.append({race_num: race_url})
+
+        race_urls_dict[place] = race_info
+
+    return race_urls_dict
 
 
 def get_race_data(url: str) -> list:
