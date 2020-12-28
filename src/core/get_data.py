@@ -1,4 +1,5 @@
 from src.lib.webdriver import Driver
+import csv
 
 base_list_page_url: str = (
     "https://race.netkeiba.com/top/race_list_sub.html?kaisai_date="
@@ -21,6 +22,25 @@ table_header = (
     "コーナー通過順",
     "厩舎",
     "馬体重(増減)",
+)
+
+data_header = (
+    "着順",
+    "枠",
+    "馬順",
+    "馬名",
+    "年齢",
+    "斤量",
+    "騎手",
+    "タイム",
+    "着差",
+    "人気",
+    "単勝オッズ",
+    "後3F",
+    "コーナー通過順",
+    "厩舎",
+    "馬体重",
+    "体重増減",
 )
 
 driver: Driver = Driver()
@@ -115,6 +135,13 @@ def get_race_data(url: str) -> list:
             ]
         )
     return race_data
+
+
+def write_data_to_csv(path, data):
+    with open(path, "w", encoding="utf-8", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(data_header)
+        writer.writerows(data)
 
 
 def _get_weight(html):
