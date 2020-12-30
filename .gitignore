@@ -1,4 +1,4 @@
 /.venv
 /.vscode
 src/**/__pycache__
-race_data
+race_data*
