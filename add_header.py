@@ -18,7 +18,7 @@ for path in p.glob("*.csv"):
         for i, line in enumerate(s):
             # line = line.strip()
             if i == 0:
-                line = "race_name,ground,distance," + line
+                line = "レース名,地面,距離," + line
                 f.write(line)
             else:
                 f.write(line)
