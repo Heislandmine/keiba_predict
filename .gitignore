@@ -2,5 +2,4 @@
 /.vscode
 src/**/__pycache__
 race_data*
-notebooks
-*.csv
+notebooks/.*
